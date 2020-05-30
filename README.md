@@ -15,7 +15,11 @@ However, virtually every feature of Noria is missing from this
 toy, including:
 
   persistence
+
   negative records
+
   schema change
+
   partial
+
   multi-core
