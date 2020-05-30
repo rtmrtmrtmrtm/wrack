@@ -38,7 +38,7 @@ main(int argc, char *argv[])
   double t0 = now();
   int nwrites = 0;
   while(now() - t0 < 10){
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < 100; i++){
       write_votes_0(random() % nstories, random());
       nwrites++;
     }
