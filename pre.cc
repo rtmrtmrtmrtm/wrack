@@ -320,8 +320,8 @@ public:
   void emit() {
     printf("struct %s_record {\n", name().c_str());
     std::vector<Col> cc = output_cols();
-    for(auto c : cc){
-      printf("  %s %s;\n", xxtype(c.type()), c.name().c_str());
+    for(int i = 1; i < cc.size(); i++){
+      printf("  %s %s;\n", xxtype(cc[i].type()), cc[i].name().c_str());
     }
     printf("};\n");
     printf("std::unordered_map<%s,%s_record> %s_data;\n", xxtype(cc[0].type()), name().c_str(), name().c_str());
@@ -330,8 +330,8 @@ public:
     printf("\n{\n");
 
     printf("  struct %s_record r;\n", name().c_str());
-    for(auto c : cc){
-      printf("  r.%s = %s;\n", c.name().c_str(), c.name().c_str());
+    for(int i = 1; i < cc.size(); i++){
+      printf("  r.%s = %s;\n", cc[i].name().c_str(), cc[i].name().c_str());
     }
     printf("  %s_data[%s] = r;\n", name().c_str(), cc[0].name().c_str());
 

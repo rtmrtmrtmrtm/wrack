@@ -34,8 +34,18 @@ main(int argc, char *argv[])
   assert(xcount == 2);
   assert(read_output(19, xauthor, xcount) == false);
 
-  // now the benchmark: insert lots of votes.
+  // 40 seconds of warm-up.
   double t0 = now();
+  int warmwrites = 0;
+  while(now() - t0 < 40){
+    for(int i = 0; i < 100; i++){
+      write_votes_0(random() % nstories, random());
+      warmwrites++;
+    }
+  }
+
+  // now the benchmark: insert lots of votes.
+  t0 = now();
   int nwrites = 0;
   while(now() - t0 < 10){
     for(int i = 0; i < 100; i++){
@@ -54,7 +64,8 @@ main(int argc, char *argv[])
       total += xcount;
     }
   }
-  printf("%d total votes in output view\n", total);
+  printf("%d total votes in output view, expecting %d\n",
+         total, nwrites+warmwrites+5);
 
   printf("storieswithvc_data_0.size() %d\n", (int)storieswithvc_data_0.size());
   //printf("storieswithvc_data_1.size() %d\n", (int)storieswithvc_data_1.size());
