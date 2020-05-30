@@ -6,6 +6,7 @@
 #include <vector>
 #include <map>
 #include <ctype.h>
+#include <assert.h>
  
 // split at white-space boundaries, treating runs of
 // white space as a single space.

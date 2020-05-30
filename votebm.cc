@@ -1,4 +1,5 @@
 #include <sys/time.h>
+#include <assert.h>
 #include "votebm-schema.cc"
 
 double
@@ -45,6 +46,15 @@ main(int argc, char *argv[])
   double t1 = now();
   printf("%d writes, %.1f seconds, %.0f writes/second\n",
          nwrites, t1 - t0, nwrites / (t1 - t0));
+
+  // sum up the votes, as another sanity check.
+  int total = 0;
+  for(int i = 0; i < nstories; i++){
+    if(read_output(i, xauthor, xcount)){
+      total += xcount;
+    }
+  }
+  printf("%d total votes in output view\n", total);
 
   printf("storieswithvc_data_0.size() %d\n", (int)storieswithvc_data_0.size());
   //printf("storieswithvc_data_1.size() %d\n", (int)storieswithvc_data_1.size());
