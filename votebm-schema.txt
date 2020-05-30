@@ -1,0 +1,5 @@
+//w base stories id int author int
+//w base votes id int voter int
+//w count votecount votes id
+//w join storieswithvc stories id votecount id
+//w view output storieswithvc
