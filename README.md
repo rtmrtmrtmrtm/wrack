@@ -14,12 +14,12 @@ appears in votebm-schema.cc. The benchmark driver is votebm.cc.
 However, virtually every feature of Noria is missing from this
 toy, including:
 
-  persistence
+  * persistence
 
-  negative records
+  * negative records
 
-  schema change
+  * schema change
 
-  partial
+  * partial
 
-  multi-core
+  * multi-core
