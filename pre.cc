@@ -563,46 +563,44 @@ main(int argc, char *argv[])
 
     if(v.size() < 2)
       continue;
-    if(v[0] != "//w")
-      continue;
 
-    //w base name colname1 type1 colname2 type2 ...
-    //w join name name1 col1 name2 col2
-    //w count name name col
-    //w view name name
+    // base name colname1 type1 colname2 type2 ...
+    // join name name1 col1 name2 col2
+    // count name name col
+    // view name name
 
-    if(v[1] == "base"){
-      std::string name = v[2];
+    if(v[0] == "base"){
+      std::string name = v[1];
       std::vector<std::string> colnames;
       std::vector<std::string> coltypes;
-      for(int i = 3; i + 1 < v.size(); i += 2){
+      for(int i = 2; i + 1 < v.size(); i += 2){
         colnames.push_back(v[i+0]);
         coltypes.push_back(v[i+1]);
       }
 
       Base *th = new Base(name, colnames, coltypes);
       add(th);
-    } else if(v[1] == "count" && v.size() == 5){
-      std::string name = v[2];
-      std::string upname = v[3];
-      std::string upcol = v[4];
+    } else if(v[0] == "count" && v.size() == 4){
+      std::string name = v[1];
+      std::string upname = v[2];
+      std::string upcol = v[3];
       Count *th = new Count(name, upname, upcol);
       add(th);
-    } else if(v[1] == "view" && v.size() == 4){
-      std::string name = v[2];
-      std::string upname = v[3];
+    } else if(v[0] == "view" && v.size() == 3){
+      std::string name = v[1];
+      std::string upname = v[2];
       View *th = new View(name, upname);
       add(th);
-    } else if(v[1] == "join" && v.size() == 7){
-      std::string name = v[2];
-      std::string upname0 = v[3];
-      std::string upcol0 = v[4];
-      std::string upname1 = v[5];
-      std::string upcol1 = v[6];
+    } else if(v[0] == "join" && v.size() == 6){
+      std::string name = v[1];
+      std::string upname0 = v[2];
+      std::string upcol0 = v[3];
+      std::string upname1 = v[4];
+      std::string upcol1 = v[5];
       Join *th = new Join(name, upname0, upcol0, upname1, upcol1);
       add(th);
     } else {
-      fprintf(stderr, "unknown directive %s\n", v[1].c_str());
+      fprintf(stderr, "unknown directive %s\n", v[0].c_str());
     }
   }
 
