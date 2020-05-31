@@ -71,6 +71,8 @@ main(int argc, char *argv[])
          total, nwrites+warmwrites+5);
 
   printf("storieswithvc_data_0.size() %d\n", (int)storieswithvc_data_0.size());
+  printf("  load_factor %.2f\n", storieswithvc_data_0.load_factor());
+  printf("  max_load_factor %.2f\n", storieswithvc_data_0.max_load_factor());
   //printf("storieswithvc_data_1.size() %d\n", (int)storieswithvc_data_1.size());
   printf("votecount_data.size() %d\n", (int)votecount_data.size());
   printf("output_data.size() %d\n", (int)output_data.size());
