@@ -34,15 +34,18 @@ main(int argc, char *argv[])
   assert(xcount == 2);
   assert(read_output(19, xauthor, xcount) == false);
 
-  // 40 seconds of warm-up.
   double t0 = now();
   int warmwrites = 0;
+
+#if 0
+  // 40 seconds of warm-up.
   while(now() - t0 < 40){
     for(int i = 0; i < 100; i++){
       write_votes_0(random() % nstories, random());
       warmwrites++;
     }
   }
+#endif
 
   // now the benchmark: insert lots of votes.
   t0 = now();
