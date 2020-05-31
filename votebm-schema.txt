@@ -1,4 +1,4 @@
-base stories id int author int
+base stories id int author int title string url string
 base votes id int voter int
 count votecount votes id
 join storieswithvc stories id votecount id

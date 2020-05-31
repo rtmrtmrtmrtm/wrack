@@ -20,7 +20,10 @@ main(int argc, char *argv[])
   write_votes_0(17, 24);
 
   for(int i = 0; i < nstories; i++){
-    write_stories_0(i, i);
+    char title[128], url[128];
+    sprintf(title, "t%d", i);
+    sprintf(title, "u%d", i);
+    write_stories_0(i, i, title, url);
   }
 
   write_votes_0(17, 25);
@@ -28,17 +31,19 @@ main(int argc, char *argv[])
   write_votes_0(18, 27);
 
   int xauthor, xcount;
-  assert(read_output(17, xauthor, xcount) == true);
+  std::string xtitle, xurl;
+  assert(read_output(17, xauthor, xtitle, xurl, xcount) == true);
   assert(xcount == 3);
-  assert(read_output(18, xauthor, xcount) == true);
+  assert(read_output(18, xauthor, xtitle, xurl, xcount) == true);
   assert(xcount == 2);
-  assert(read_output(19, xauthor, xcount) == false);
+  assert(read_output(19, xauthor, xtitle, xurl, xcount) == false);
 
   double t0 = now();
   int warmwrites = 0;
 
-#if 0
+#if 1
   // 40 seconds of warm-up.
+  // doesn't change results much.
   while(now() - t0 < 40){
     for(int i = 0; i < 100; i++){
       write_votes_0(random() % nstories, random());
@@ -63,7 +68,7 @@ main(int argc, char *argv[])
   // sum up the votes, as another sanity check.
   int total = 0;
   for(int i = 0; i < nstories; i++){
-    if(read_output(i, xauthor, xcount)){
+    if(read_output(i, xauthor, xtitle, xurl, xcount)){
       total += xcount;
     }
   }
