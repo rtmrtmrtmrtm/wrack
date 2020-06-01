@@ -41,7 +41,7 @@ main(int argc, char *argv[])
   double t0 = now();
   int warmwrites = 0;
 
-#if 1
+#if 0
   // 40 seconds of warm-up.
   // doesn't change results much.
   while(now() - t0 < 40){

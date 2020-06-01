@@ -112,7 +112,11 @@ Operator::emit_write_header(int i)
   for(auto it = cc.begin(); it != cc.end(); ++it){
     if(it != cc.begin())
       printf(", ");
-    printf("%s %s", xxtype((*it).type()), (*it).name().c_str());
+    std::string type = (*it).type();
+    std::string name = (*it).name();
+    if(type == "string")
+      printf("const ");
+    printf("%s %s%s", xxtype(type), type=="string"?"&":"", name.c_str());
   }
   printf(")");
 }
